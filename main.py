@@ -184,7 +184,7 @@ if __name__ == "__main__":
     paths = []
 
     for i in range(count):
-        print(f'Run №{str(i + 1)}')
+        print(f'Run #bu{str(i + 1)}')
         paths.append(aco.run(points=points))
         print(f'  {paths[len(paths)-1].length}')
         print(f'  {paths[len(paths) - 1].index}')
