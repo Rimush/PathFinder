@@ -34,8 +34,6 @@ class ACO:
 
     @staticmethod
     def __earthly_distance(a, b):
-        return sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2)
-
         radian_latitude_a = a[0] * pi / 180
         radian_latitude_b = b[0] * pi / 180
         radian_longitude_a = a[1] * pi / 180
@@ -146,6 +144,7 @@ class ACO:
 
 
 def open_file(file):
+    print('Open file')
     tmp_points = []
 
     with open(file, 'r') as f:
@@ -161,7 +160,8 @@ def open_file(file):
 
 
 def save_file(path):
-    open('output.txt', 'w')
+    print('Save file')
+    open('output.txt', 'w', encoding='utf8')
     with open('output.txt', 'a') as f:
         f.write('Медведев Илья Валерьевич\n')
         f.write(f'{str(round(path.length))}\n')
@@ -172,6 +172,7 @@ def save_file(path):
 
 
 if __name__ == "__main__":
+    print('Begin')
     start = time()
 
     count = 5
@@ -183,19 +184,23 @@ if __name__ == "__main__":
     paths = []
 
     for i in range(count):
-        print(f'Попытка №{str(i + 1)}')
+        print(f'Run №{str(i + 1)}')
         paths.append(aco.run(points=points))
-        print(paths[len(paths)-1].length)
-        print(paths[len(paths) - 1].index)
+        print(f'  {paths[len(paths)-1].length}')
+        print(f'  {paths[len(paths) - 1].index}')
 
     path = paths[0]
     for i in range(1, len(paths)):
         if paths[i].length < path.length:
-            path = i
+            path = paths[i]
+
+    print('Choice')
+    print(f'  {path.length}')
+    print(f'  {path.index}')
 
     save_file(path)
-    print(f'Затрачено {str(time() - start)} сек.')
-    print('Конец')
+    print(f'Time spent {str(time() - start)} sec.')
+    print('End')
 
 
 
